@@ -616,7 +616,7 @@ macro(add_llvm_tool name)
 
   list(FIND LLVM_TOOLCHAIN_TOOLS ${name} LLVM_IS_${name}_TOOLCHAIN_TOOL)
   if (LLVM_IS_${name}_TOOLCHAIN_TOOL GREATER -1 OR NOT LLVM_INSTALL_TOOLCHAIN_ONLY)
-    if( LLVM_BUILD_TOOLS )
+    #if( LLVM_BUILD_TOOLS )
       install(TARGETS ${name}
               EXPORT LLVMExports
               RUNTIME DESTINATION bin
@@ -629,11 +629,11 @@ macro(add_llvm_tool name)
                                   -DCMAKE_INSTALL_COMPONENT=${name}
                                   -P "${CMAKE_BINARY_DIR}/cmake_install.cmake")
       endif()
-    endif()
+    #endif()
   endif()
-  if( LLVM_BUILD_TOOLS )
+  #if( LLVM_BUILD_TOOLS )
     set_property(GLOBAL APPEND PROPERTY LLVM_EXPORTS ${name})
-  endif()
+  #endif()
   set_target_properties(${name} PROPERTIES FOLDER "Tools")
 endmacro(add_llvm_tool name)
 

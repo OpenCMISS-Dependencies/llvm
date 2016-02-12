@@ -2,6 +2,10 @@
 
 cmake_minimum_required(VERSION 3.2)
 
+if (NOT DEFINED PACKAGE_CONFIG_DIR)
+    set(PACKAGE_CONFIG_DIR "cmake" CACHE STRING "Common package config dir")
+endif()
+
 if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   message(STATUS "No build type selected, default to Debug")
   set(CMAKE_BUILD_TYPE "Debug")
@@ -319,9 +323,9 @@ endif()
 # components which may not strictly be necessary (tools, examples, and tests).
 #
 # This is primarily to support building smaller or faster project files.
-option(LLVM_INCLUDE_TOOLS "Generate build targets for the LLVM tools." OFF)
+option(LLVM_INCLUDE_TOOLS "Generate build targets for the LLVM tools." ON)
 option(LLVM_BUILD_TOOLS
-  "Build the LLVM tools. If OFF, just generate build targets." OFF)
+  "Build the LLVM tools. If OFF, just generate build targets." ON)
 
 option(LLVM_INCLUDE_UTILS "Generate build targets for the LLVM utils." OFF)
 
@@ -611,10 +615,9 @@ if(WITH_POLLY)
   endif()
 endif(WITH_POLLY)
 
-#if( LLVM_INCLUDE_TOOLS )
-#  add_subdirectory(tools)
-#endif()
-add_llvm_external_project("tools/clang")
+if( LLVM_INCLUDE_TOOLS )
+  add_subdirectory(tools)
+endif()
 
 if( LLVM_INCLUDE_EXAMPLES )
   add_subdirectory(examples)
