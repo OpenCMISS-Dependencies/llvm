@@ -372,6 +372,8 @@ set(TARGET_TRIPLE "${LLVM_DEFAULT_TARGET_TRIPLE}")
 
 include(HandleLLVMOptions)
 
+set(CMAKE_CXX_STANDARD 11)
+
 # Verify that we can find a Python 2 interpreter.  Python 3 is unsupported.
 # FIXME: We should support systems with only Python 3, but that requires work
 # on LLDB.
